@@ -3,10 +3,40 @@ import isObj from "lodash.isplainobject";
 
 const obj: Record<string, any> = {
   1: 1,
-  20: "test",
-  /* a: [1, 20, 2, 10, 3, 5, 6, 3, 55, 10, 30, 40],
-  b: ["1", "20", "2", "10", "3", "5", "6", "3", "55", "10", "30", "40"],
-  2: true,
+  /* 20: "test", */
+  /* a: [1, 20, 2, 10, 3, 5, 6, 3, 55, 10, 30, 40], */
+  /* b: ["1", "20", "2", "10", "3", "5", "6", "3", "55", "10", "30", "40"], */
+  /* 111: [
+    {
+      desc: "First time using tabby simply link your card.",
+      title: "Set up your account",
+    },
+    {
+      desc: "Buy any number of times and spend up to {{limit}} {{currency}} during the month.",
+      title: "Check out with tabby",
+    },
+    {
+      desc: "Pay for all your purchases at the end of the month using any card.",
+      title: "Pay at the end of the month",
+    },
+  ], */
+  10: {
+    list: [
+      {
+        desc: "First time using tabby simply link your card.",
+        title: "Set up your account",
+      },
+      {
+        desc: "Buy any number of times and spend up to {{limit}} {{currency}} during the month.",
+        title: "Check out with tabby",
+      },
+      {
+        desc: "Pay for all your purchases at the end of the month using any card.",
+        title: "Pay at the end of the month",
+      },
+    ],
+  },
+  /* 2: true,
   month: ["month", "months"],
   numerals: {
     "0": "0",
@@ -42,22 +72,7 @@ const obj: Record<string, any> = {
     "8": "8",
     "9": "9",
   },
-  10: {
-    list: [
-      {
-        desc: "First time using tabby simply link your card.",
-        title: "Set up your account",
-      },
-      {
-        desc: "Buy any number of times and spend up to {{limit}} {{currency}} during the month.",
-        title: "Check out with tabby",
-      },
-      {
-        desc: "Pay for all your purchases at the end of the month using any card.",
-        title: "Pay at the end of the month",
-      },
-    ],
-  },
+  
   30: 2,
   40: 3,
   d: {
@@ -95,50 +110,52 @@ const getJsonStr = (obj: Record<string, any>) => {
   const isNumber = (something: any) => typeof something === "number";
   const getValue = (v: any) => (isStr(v) ? `"${v}"` : v);
   const getSortKeys = (obj: object) => Object.keys(obj).sort((a, b) => a.localeCompare(b));
+  const body = (content: string) => `{${EOL}${content}${EOL}}`;
 
   const work = (obj: Record<string, any>, depth: number) => {
     const keys = getSortKeys(obj);
 
-    let content = "";
+    const content: string[] = [];
 
     for (const key of keys) {
       if (isObj(obj[key])) {
-        content += `${EOL}${sRepeat(depth * 2)}"${key}": {${work(
-          obj[key],
-          depth + 1
-        )}${EOL}${sRepeat(depth * 2)}},`;
+        const indent = sRepeat(depth * 2);
+
+        content.push(
+          `${indent}"${key}": {${EOL}${work(obj[key], depth + 1).join(`,${EOL}`)}${EOL}${indent}}`
+        );
       } else if (Array.isArray(obj[key]) && obj[key].length) {
-        let arraySort = "";
+        let array = "";
 
         if (obj[key].every(isStr)) {
-          arraySort = `[${[...obj[key]]
+          array = `[${EOL}${[...obj[key]]
             .sort((a, b) => a.localeCompare(b))
-            .map((item) => `${EOL}${sRepeat((depth + 1) * 2)}"${item}"`)}${EOL}${sRepeat(
-            depth * 2
-          )}],`;
+            .map((item) => `${sRepeat((depth + 1) * 2)}"${item}"`)
+            .join(`,${EOL}`)}${EOL}${sRepeat(depth * 2)}]`;
         } else if (obj[key].every(isNumber)) {
-          arraySort = `[${[...obj[key]].sort((a, b) => a - b)}],`;
+          array = `[${[...obj[key]].sort((a, b) => a - b).join(",")}]`;
         } else if (obj[key].every(isObj)) {
-          arraySort = `[${[...obj[key]].map(
-            (item) =>
-              `${EOL}${sRepeat((depth + 1) * 2)}{${work(item, depth + 2)}${EOL}${sRepeat(
-                (depth + 1) * 2
-              )}}`
-          )}${EOL}${sRepeat(depth * 2)}],`;
+          const indent = sRepeat((depth + 1) * 2);
+
+          array = `[${EOL}${[...obj[key]]
+            .map(
+              (item) => `${indent}{${EOL}${work(item, depth + 2).join(`,${EOL}`)}${EOL}${indent}}`
+            )
+            .join(`,${EOL}`)}${EOL}${sRepeat(depth * 2)}]`;
         } else {
-          arraySort = obj[key];
+          array = `[${obj[key].join(",")}]`;
         }
 
-        content += `${EOL}${sRepeat(depth * 2)}"${key}": ${arraySort}`;
+        content.push(`${sRepeat(depth * 2)}"${key}": ${array}`);
       } else {
-        content += `${sRepeat(depth * 2)}"${key}": ${getValue(obj[key])},`;
+        content.push(`${sRepeat(depth * 2)}"${key}": ${getValue(obj[key])}`);
       }
     }
 
     return content;
   };
 
-  return `{${EOL}${work(obj, 1)}${EOL}}`;
+  return body(work(obj, 1).join(`,${EOL}`));
 };
 
 /* const json = (function work(obj, depth) {
