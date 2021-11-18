@@ -3,10 +3,10 @@ import isObj from "lodash.isplainobject";
 
 const obj: Record<string, any> = {
   1: 1,
-  /* 20: "test", */
-  /* a: [1, 20, 2, 10, 3, 5, 6, 3, 55, 10, 30, 40], */
-  /* b: ["1", "20", "2", "10", "3", "5", "6", "3", "55", "10", "30", "40"], */
-  /* 111: [
+  20: "test",
+  a: [1, 20, 2, 10, 3, 5, 6, 3, 55, 10, 30, 40],
+  b: ["1", "20", "2", "10", "3", "5", "6", "3", "55", "10", "30", "40"],
+  111: [
     {
       desc: "First time using tabby simply link your card.",
       title: "Set up your account",
@@ -19,7 +19,7 @@ const obj: Record<string, any> = {
       desc: "Pay for all your purchases at the end of the month using any card.",
       title: "Pay at the end of the month",
     },
-  ], */
+  ],
   10: {
     list: [
       {
@@ -36,7 +36,7 @@ const obj: Record<string, any> = {
       },
     ],
   },
-  /* 2: true,
+  2: true,
   month: ["month", "months"],
   numerals: {
     "0": "0",
@@ -72,7 +72,7 @@ const obj: Record<string, any> = {
     "8": "8",
     "9": "9",
   },
-  
+
   30: 2,
   40: 3,
   d: {
@@ -94,7 +94,7 @@ const obj: Record<string, any> = {
         n: "1",
       },
     },
-  }, */
+  },
 };
 
 /* 
@@ -102,15 +102,28 @@ fs
     .readFile(oneOfPaths, "utf8")
 */
 
-const getJsonStr = (obj: Record<string, any>) => {
-  const EOL = "\n";
-  const SPACE = " ";
-  const sRepeat = (depth: number) => SPACE.repeat(depth);
+type OPTION = {
+  space?: string;
+  eol?: string;
+};
+
+type Required_v2<T extends object, K extends keyof T = keyof T> = Required<Pick<T, K>> & Omit<T, K>;
+
+const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
+  type p = typeof option;
+  const defaultOption = { space: " ", eol: "\n" };
+
+  const { eol, space }: Required_v2<OPTION, keyof typeof defaultOption> = {
+    ...defaultOption,
+    ...option,
+  };
+
+  const sRepeat = (depth: number) => space.repeat(depth);
   const isStr = (something: any) => typeof something === "string";
   const isNumber = (something: any) => typeof something === "number";
   const getValue = (v: any) => (isStr(v) ? `"${v}"` : v);
   const getSortKeys = (obj: object) => Object.keys(obj).sort((a, b) => a.localeCompare(b));
-  const body = (content: string) => `{${EOL}${content}${EOL}}`;
+  const body = (content: string) => `{${eol}${content}${eol}}`;
 
   const work = (obj: Record<string, any>, depth: number) => {
     const keys = getSortKeys(obj);
@@ -122,26 +135,26 @@ const getJsonStr = (obj: Record<string, any>) => {
         const indent = sRepeat(depth * 2);
 
         content.push(
-          `${indent}"${key}": {${EOL}${work(obj[key], depth + 1).join(`,${EOL}`)}${EOL}${indent}}`
+          `${indent}"${key}": {${eol}${work(obj[key], depth + 1).join(`,${eol}`)}${eol}${indent}}`
         );
       } else if (Array.isArray(obj[key]) && obj[key].length) {
         let array = "";
 
         if (obj[key].every(isStr)) {
-          array = `[${EOL}${[...obj[key]]
+          array = `[${eol}${[...obj[key]]
             .sort((a, b) => a.localeCompare(b))
             .map((item) => `${sRepeat((depth + 1) * 2)}"${item}"`)
-            .join(`,${EOL}`)}${EOL}${sRepeat(depth * 2)}]`;
+            .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`;
         } else if (obj[key].every(isNumber)) {
           array = `[${[...obj[key]].sort((a, b) => a - b).join(",")}]`;
         } else if (obj[key].every(isObj)) {
           const indent = sRepeat((depth + 1) * 2);
 
-          array = `[${EOL}${[...obj[key]]
+          array = `[${eol}${[...obj[key]]
             .map(
-              (item) => `${indent}{${EOL}${work(item, depth + 2).join(`,${EOL}`)}${EOL}${indent}}`
+              (item) => `${indent}{${eol}${work(item, depth + 2).join(`,${eol}`)}${eol}${indent}}`
             )
-            .join(`,${EOL}`)}${EOL}${sRepeat(depth * 2)}]`;
+            .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`;
         } else {
           array = `[${obj[key].join(",")}]`;
         }
@@ -155,7 +168,7 @@ const getJsonStr = (obj: Record<string, any>) => {
     return content;
   };
 
-  return body(work(obj, 1).join(`,${EOL}`));
+  return body(work(obj, 1).join(`,${eol}`));
 };
 
 /* const json = (function work(obj, depth) {
