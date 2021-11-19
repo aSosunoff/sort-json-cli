@@ -1,8 +1,17 @@
 import fs from "fs-extra";
 import isObj from "lodash.isplainobject";
+import chalk from "chalk";
+import path from "path";
+import jsStringEscape from "js-string-escape";
+import jsesc from "jsesc";
+
+const log = console.log;
+const prefix = "✨ sort-json-cli: ";
 
 const obj: Record<string, any> = {
-  1: 1,
+  onlyNeed: "You'll only need to do this once",
+  description: "Your privacy is very important to us. \nYour data is stored securely.",
+  /* 1: 1,
   20: "test",
   a: [1, 20, 2, 10, 3, 5, 6, 3, 55, 10, 30, 40],
   b: ["1", "20", "2", "10", "3", "5", "6", "3", "55", "10", "30", "40"],
@@ -94,13 +103,8 @@ const obj: Record<string, any> = {
         n: "1",
       },
     },
-  },
+  }, */
 };
-
-/* 
-fs
-    .readFile(oneOfPaths, "utf8")
-*/
 
 type OPTION = {
   space?: string;
@@ -110,7 +114,6 @@ type OPTION = {
 type Required_v2<T extends object, K extends keyof T = keyof T> = Required<Pick<T, K>> & Omit<T, K>;
 
 const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
-  type p = typeof option;
   const defaultOption = { space: " ", eol: "\n" };
 
   const { eol, space }: Required_v2<OPTION, keyof typeof defaultOption> = {
@@ -118,11 +121,26 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
     ...option,
   };
 
+  const formatString = (v: string) => v.replace(/\n/g, "\\n").replace(/"/g, '\\"');
   const sRepeat = (depth: number) => space.repeat(depth);
-  const isStr = (something: any) => typeof something === "string";
+  const isStr = (something: any): something is string => typeof something === "string";
   const isNumber = (something: any) => typeof something === "number";
-  const getValue = (v: any) => (isStr(v) ? `"${v}"` : v);
-  const getSortKeys = (obj: object) => Object.keys(obj).sort((a, b) => a.localeCompare(b));
+  const getValue = <T>(v: T) => (isStr(v) ? `"${formatString(v)}"` : v);
+  const getSortKeys = (obj: object) =>
+    Object.keys(obj).sort((a, b) => {
+      const isUpperCaseA = /^[A-Z]+$/.test(a);
+      const isUpperCaseB = /^[A-Z]+$/.test(b);
+
+      if (isUpperCaseA && isUpperCaseB) {
+        return a.localeCompare(b);
+      } else if (isUpperCaseA) {
+        return -1;
+      } else if (isUpperCaseB) {
+        return 1;
+      }
+
+      return a.localeCompare(b);
+    });
   const body = (content: string) => `{${eol}${content}${eol}}`;
 
   const work = (obj: Record<string, any>, depth: number) => {
@@ -143,7 +161,7 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
         if (obj[key].every(isStr)) {
           array = `[${eol}${[...obj[key]]
             .sort((a, b) => a.localeCompare(b))
-            .map((item) => `${sRepeat((depth + 1) * 2)}"${item}"`)
+            .map((item) => `${sRepeat((depth + 1) * 2)}${getValue(item)}`)
             .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`;
         } else if (obj[key].every(isNumber)) {
           array = `[${[...obj[key]].sort((a, b) => a - b).join(",")}]`;
@@ -171,32 +189,28 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
   return body(work(obj, 1).join(`,${eol}`));
 };
 
-/* const json = (function work(obj, depth) {
-  const keys = getSortKeys(obj);
+const readFile = async (oneOfPaths: string) => {
+  const pathReadFile = path.resolve(__dirname, oneOfPaths);
 
-  let content = "";
+  const filesContent = await fs.readFile(pathReadFile, "utf8");
 
-  for (const key of keys) {
-    if (isObj(obj[key])) {
-      content += `${EOL}${SPACE.repeat(depth * 2)}"${key}": ${work(obj[key], depth + 1)}`;
-    } else if (Array.isArray(obj[key]) && obj[key].length) {
-      let arraySort = [];
+  let parsedJson: Record<string, any>;
 
-      if (obj[key].every(isStr)) {
-        arraySort = [...obj[key]].sort((a, b) => a.localeCompare(b));
-      } else {
-        arraySort = [...obj[key]].sort((a, b) => a - b);
-      }
+  try {
+    parsedJson = JSON.parse(filesContent);
+  } catch (err) {
+    log(`${chalk.grey(prefix)}${oneOfPaths} - ${chalk.red(err)}`);
 
-      content += `${EOL}${SPACE.repeat(depth * 2)}"${key}":${SPACE.repeat(1)}[${arraySort}],`;
-    } else {
-      content += `${EOL}${SPACE.repeat(depth * 2)}"${key}":${SPACE.repeat(1)}${getValue(
-        obj[key]
-      )},`;
-    }
+    return Promise.resolve(null);
   }
 
-  return `{${content}${EOL}${SPACE.repeat((depth - 1) * 2)}}`;
-})(obj, 1); */
+  const content = getJsonStr(parsedJson);
 
-console.log(getJsonStr(obj));
+  const pathWriteFile = path.resolve(__dirname, "./target.json");
+
+  await fs.writeFile(pathWriteFile, content);
+};
+
+readFile("./source.json");
+
+/* console.log(getJsonStr(obj)); */
