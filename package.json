@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx ts-node ./src/index.ts",
     "ss": "node --loader ts-node/esm ./src/index.ts -v",
-    "s": "npx ts-node ./src/test.ts"
+    "s": "npx ts-node ./src/test.ts",
+    "t": "npx ts-node ./src/t.ts"
   },
   "author": "",
   "license": "ISC",
