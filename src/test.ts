@@ -7,21 +7,22 @@ const log = console.log;
 const prefix = "✨ sort-json-cli: ";
 
 const obj: Record<string, any> = {
+  /* w: ["1", "2", "3"], */
   /* onlyNeed: "You'll only need to do this once", */
   a1: 1,
   b1: {
     xb2: 1,
     yb2: 1,
   },
-  x1: 1,
+  /* x1: 1, */
   y1: {
     a2: 1,
     x2: 1,
-    y2: {
+    /* y2: {
       a3: 1,
       x3: 1,
       y3: 1,
-    },
+    }, */
   },
 };
 
@@ -148,10 +149,10 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
   }
   //#endregion
 
-  const compose =
+  /* const compose =
     (...fn: Array<(...arg: any) => any>) =>
     (x: any) =>
-      fn.reduceRight((res, f) => f(res), x);
+      fn.reduceRight((res, f) => f(res), x); */
 
   const work = (obj: Record<string, any>) => {
     const queue = new Queue();
@@ -186,12 +187,12 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
           let array = "";
 
           if (data.every(isStr)) {
-            /* array = `[${eol}${[...data]
+            array = `[${eol}${[...data]
               .sort((a, b) => a.localeCompare(b))
               .map((item) => `${sRepeat((depth + 1) * 2)}${getValue(item)}`)
-              .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`; */
+              .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`;
           } else if (data.every(isNumber)) {
-            /* array = `[${[...data].sort((a, b) => a - b).join(",")}]`; */
+            array = `[${[...data].sort((a, b) => a - b).join(",")}]`;
           } else if (data.every(isObj)) {
             /* const indent = sRepeat((depth + 1) * 2);
 
@@ -201,10 +202,10 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
               )
               .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`; */
           } else {
-            /* array = `[${data.join(",")}]`; */
+            array = `[${data.join(",")}]`;
           }
 
-          /* innerContent.push(`${sRepeat(depth * 2)}"${key}": ${array}`); */
+          ctx.addToSub(`${sRepeat(depth * 2)}"${key}": ${array}`);
         } else {
           ctx.addToSub(`${sRepeat(depth * 2)}"${key}": ${getValue(data)}`);
         }
@@ -226,9 +227,8 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
           if (contentResult) {
             ctx.add(contentResult);
           }
+          queue.items.pop();
         }
-
-        queue.items.pop();
       }
     }
 
