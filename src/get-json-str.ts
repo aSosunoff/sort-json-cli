@@ -28,9 +28,9 @@ export const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) =
     const content: string[] = [];
 
     for (const key of keys) {
-      if (isObj(obj[key])) {
-        const indent = sRepeat(depth * 2);
+      const indent = sRepeat(depth * 2);
 
+      if (isObj(obj[key])) {
         content.push(
           `${indent}"${key}": {${eol}${work(obj[key], depth + 1).join(`,${eol}`)}${eol}${indent}}`
         );
@@ -41,24 +41,25 @@ export const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) =
           array = `[${eol}${[...obj[key]]
             // .sort((a, b) => a.localeCompare(b))
             .map((item) => `${sRepeat((depth + 1) * 2)}${getValue(item)}`)
-            .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`;
+            .join(`,${eol}`)}${eol}${indent}]`;
         } else if (obj[key].every(isNumber)) {
           array = `[${[...obj[key]].sort((a, b) => a - b).join(",")}]`;
         } else if (obj[key].every(isObj)) {
-          const indent = sRepeat((depth + 1) * 2);
+          const indentInner = sRepeat((depth + 1) * 2);
 
           array = `[${eol}${[...obj[key]]
             .map(
-              (item) => `${indent}{${eol}${work(item, depth + 2).join(`,${eol}`)}${eol}${indent}}`
+              (item) =>
+                `${indentInner}{${eol}${work(item, depth + 2).join(`,${eol}`)}${eol}${indentInner}}`
             )
-            .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`;
+            .join(`,${eol}`)}${eol}${indent}]`;
         } else {
           array = `[${obj[key].join(",")}]`;
         }
 
-        content.push(`${sRepeat(depth * 2)}"${key}": ${array}`);
+        content.push(`${indent}"${key}": ${array}`);
       } else {
-        content.push(`${sRepeat(depth * 2)}"${key}": ${getValue(obj[key])}`);
+        content.push(`${indent}"${key}": ${getValue(obj[key])}`);
       }
     }
 
