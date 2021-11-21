@@ -7,23 +7,32 @@ const log = console.log;
 const prefix = "✨ sort-json-cli: ";
 
 const obj: Record<string, any> = {
-  /* w: ["1", "2", "3"], */
+  w: [
+    {
+      x1: 1,
+      y1: 1,
+    },
+    {
+      x2: 1,
+      y2: 1,
+    },
+  ],
   /* onlyNeed: "You'll only need to do this once", */
-  a1: 1,
+  /* a1: 1,
   b1: {
     xb2: 1,
     yb2: 1,
-  },
+  }, */
   /* x1: 1, */
-  y1: {
+  /* y1: {
     a2: 1,
     x2: 1,
-    /* y2: {
+    y2: {
       a3: 1,
       x3: 1,
       y3: 1,
-    }, */
-  },
+    },
+  }, */
 };
 
 type OPTION = {
@@ -118,15 +127,17 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
   class Context {
     content: string[] = [];
     subContent: string[] = [];
-    saveContent: Array<string[]> = [];
+    saveSubContent: Array<string[]> = [];
 
     add(v: string) {
       this.content.push(v);
     }
 
     saveContext() {
-      this.saveContent.push([...this.subContent]);
-      this.subContent.length = 0;
+      if (this.subContent.length) {
+        this.saveSubContent.push([...this.subContent]);
+        this.subContent.length = 0;
+      }
     }
 
     addToSub(v: string) {
@@ -134,7 +145,7 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
     }
 
     addToSubWithSave(v: string) {
-      const saveContextLast = this.saveContent.pop();
+      const saveContextLast = this.saveSubContent.pop();
 
       if (saveContextLast) {
         this.subContent.push(...[...saveContextLast, v]);
@@ -215,7 +226,7 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
         const lastHandler = handler.getLastHandler();
 
         if (lastHandler) {
-          if (ctx.saveContent.length) {
+          if (ctx.saveSubContent.length) {
             const data = lastHandler(ctx.subContent.join(`,${eol}`));
             ctx.clearSub();
             ctx.addToSubWithSave(data);
