@@ -146,7 +146,7 @@
             "desc": "Pay for all your purchases at the end of the month using any card.",
             "title": "Pay at the end of the month"
           }
-        ],
+          ],
         "title": "How it works"
       },
       "preview": "Why pay every time you buy? Simply, check out with tabby and pay for all your purchases at the end of the month."
@@ -429,7 +429,7 @@
             "desc": "Link your debit or credit card and we'll automatically charge you at the end of the month",
             "title": "Pay at the end of the month"
           }
-        ],
+          ],
         "title": "What's next?"
       }
     }
