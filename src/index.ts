@@ -3,17 +3,17 @@ import chalk from "chalk";
 import path from "path";
 
 import { getJsonStr } from "./get-json-str";
-import { cli } from "./cli";
+/* import { cli } from "./cli"; */
 
 const log = console.log;
 
-if (cli.flags.version) {
+/* if (cli.flags.version) {
   log(cli.pkg.version);
   process.exit(0);
 } else if (cli.flags.help) {
   log(cli.help);
   process.exit(0);
-}
+} */
 
 const prefix = "✨ sort-json-cli: ";
 
