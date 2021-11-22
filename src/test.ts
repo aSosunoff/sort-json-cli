@@ -40,10 +40,7 @@ type OPTION = {
   eol?: string;
 };
 
-type Required_v2<T extends object, K extends keyof T = keyof T> = Required<
-  Pick<T, K>
-> &
-  Omit<T, K>;
+type Required_v2<T extends object, K extends keyof T = keyof T> = Required<Pick<T, K>> & Omit<T, K>;
 
 const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
   const defaultOption = { space: " ", eol: "\n" };
@@ -53,15 +50,12 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
     ...option,
   };
 
-  const formatString = (v: string) =>
-    v.replace(/\n/g, "\\n").replace(/"/g, '\\"');
+  const formatString = (v: string) => v.replace(/\n/g, "\\n").replace(/"/g, '\\"');
   const sRepeat = (depth: number) => space.repeat(depth);
-  const isStr = (something: any): something is string =>
-    typeof something === "string";
+  const isStr = (something: any): something is string => typeof something === "string";
   const isNumber = (something: any) => typeof something === "number";
   const getValue = <T>(v: T) => (isStr(v) ? `"${formatString(v)}"` : v);
-  const getSortKeys = (obj: object) =>
-    Object.keys(obj).sort((a, b) => (a > b ? 1 : -1));
+  const getSortKeys = (obj: object) => Object.keys(obj).sort((a, b) => (a > b ? 1 : -1));
 
   //#region QueueContext
   interface QueueContext {
@@ -73,7 +67,7 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
   interface QueueItem
     extends Iterable<{
       key: QueueContext["keys"][any];
-      data: QueueContext["obj"][any];
+      value: QueueContext["obj"][any];
       depth: number;
     }> {}
 
@@ -93,7 +87,7 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
 
             yield {
               key,
-              data: obj[key],
+              value: obj[key],
               depth,
             };
           }
@@ -134,10 +128,10 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
     }
 
     saveContext() {
-      if (this.subContent.length) {
-        this.saveSubContent.push([...this.subContent]);
-        this.subContent.length = 0;
-      }
+      /* if (this.subContent.length) {
+      } */
+      this.saveSubContent.push([...this.subContent]);
+      this.subContent.length = 0;
     }
 
     addToSub(v: string) {
@@ -177,48 +171,65 @@ const getJsonStr = (obj: Record<string, any>, option?: Partial<OPTION>) => {
 
       let isCommit = true;
 
-      for (const { key, data, depth } of item) {
-        if (isObj(data)) {
-          queue.addItemQueue(data, depth + 1);
+      for (const { key, value, depth } of item) {
+        const indent = sRepeat(depth * 2);
+
+        if (isObj(value)) {
+          queue.addItemQueue(value, depth + 1);
 
           ctx.saveContext();
 
-          handler.addHandler((content) => {
-            const indent = sRepeat(depth * 2);
-
-            return `${indent}"${key}": {${eol}${content}${eol}${indent}}`;
-          });
+          handler.addHandler((content) => `${indent}"${key}": {${eol}${content}${eol}${indent}}`);
 
           isCommit = false;
 
           break;
         }
 
-        if (Array.isArray(data) && data.length) {
-          let array = "";
-
-          if (data.every(isStr)) {
-            array = `[${eol}${[...data]
+        if (Array.isArray(value) && value.length) {
+          if (value.every(isStr)) {
+            const content = `[${eol}${[...value]
               .sort((a, b) => a.localeCompare(b))
               .map((item) => `${sRepeat((depth + 1) * 2)}${getValue(item)}`)
-              .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`;
-          } else if (data.every(isNumber)) {
-            array = `[${[...data].sort((a, b) => a - b).join(",")}]`;
-          } else if (data.every(isObj)) {
+              .join(`,${eol}`)}${eol}${indent}]`;
+
+            ctx.addToSub(`${indent}"${key}": ${content}`);
+          } else if (value.every(isNumber)) {
+            const content = `[${[...value].sort((a, b) => a - b).join(",")}]`;
+
+            ctx.addToSub(`${indent}"${key}": ${content}`);
+          } else if (value.every(isObj)) {
+            ctx.saveContext();
+
+            handler.addHandler((content) => {
+              return `${indent}"${key}": [${eol}${content}${eol}${indent}]`;
+            });
+
+            value.forEach((v) => {
+              queue.addItemQueue(v, depth + 2);
+
+              handler.addHandler((content) => {
+                /* sRepeat(depth * 2) */
+                return `${indent}{${eol}${content}${eol}${indent}}`;
+              });
+            });
+
+            isCommit = false;
+
+            break;
+
             /* const indent = sRepeat((depth + 1) * 2);
 
-            array = `[${eol}${[...data]
+            array = `[${eol}${[...value]
               .map(
                 (item) => `${indent}{${eol}${work(item, depth + 2).join(`,${eol}`)}${eol}${indent}}`
               )
               .join(`,${eol}`)}${eol}${sRepeat(depth * 2)}]`; */
           } else {
-            array = `[${data.join(",")}]`;
+            ctx.addToSub(`${indent}"${key}": [${value.join(",")}]`);
           }
-
-          ctx.addToSub(`${sRepeat(depth * 2)}"${key}": ${array}`);
         } else {
-          ctx.addToSub(`${sRepeat(depth * 2)}"${key}": ${getValue(data)}`);
+          ctx.addToSub(`${indent}"${key}": ${getValue(value)}`);
         }
       }
 
@@ -274,3 +285,19 @@ const readFile = async (oneOfPaths: string) => {
 /* readFile("./source.json"); */
 
 console.log(getJsonStr(obj));
+
+/* 
+
+const obj: Record<string, any> = {
+  a: 1,
+  b: {
+    a: 2,
+    b: {
+      a: 3,
+      b: 3,
+    },
+  },
+  c: 1,
+};
+
+*/
