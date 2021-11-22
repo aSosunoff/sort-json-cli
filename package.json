@@ -1,13 +1,15 @@
 {
   "name": "sort-json-cli",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node ./src/index.ts",
-    "ss": "node --loader ts-node/esm ./src/index.ts -v",
+    "start_old": "npx ts-node ./src/index.ts",
+    "start": "node --loader ts-node/esm ./src/index.ts -t",
+    "start_dist": "node ./dist/index.js",
     "s": "npx ts-node ./src/test.ts",
-    "t": "npx ts-node ./src/t.ts"
+    "t": "npx ts-node ./src/t.ts",
+    "dist": "cross-env CONFIG=dist webpack --mode production"
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +25,6 @@
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
     "@types/lodash.isplainobject": "^4.0.6"
-  }
+  },
+  "type": "module"
 }
