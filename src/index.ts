@@ -1,10 +1,10 @@
-import fs from "fs-extra";
-import chalk from "chalk";
 import path from "path";
-import { __dirname } from "./fix-dirname.js";
 
-import { getJsonStr } from "./get-json-str.js";
-import { cli } from "./cli.js";
+import { cli } from "./utils/cli.js";
+import { readFile } from "./utils/read-file.js";
+import { getDirname } from "./utils/fix-dirname.js";
+
+const __dirname = getDirname(import.meta);
 
 const log = console.log;
 
@@ -16,28 +16,4 @@ if (cli.flags.version) {
   process.exit(0);
 }
 
-const prefix = "✨ sort-json-cli: ";
-
-const readFile = async (oneOfPaths: string) => {
-  const pathReadFile = path.resolve(__dirname, oneOfPaths);
-
-  const filesContent = await fs.readFile(pathReadFile, "utf8");
-
-  let parsedJson: Record<string, any>;
-
-  try {
-    parsedJson = JSON.parse(filesContent);
-  } catch (err) {
-    log(`${chalk.grey(prefix)}${oneOfPaths} - ${chalk.red(err)}`);
-
-    return Promise.resolve(null);
-  }
-
-  const content = getJsonStr(parsedJson);
-
-  const pathWriteFile = path.resolve(__dirname, "./target.json");
-
-  await fs.writeFile(pathWriteFile, content);
-};
-
-readFile("./source.json");
+readFile(path.resolve(__dirname, "./source.json"));
