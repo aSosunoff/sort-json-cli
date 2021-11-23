@@ -2,17 +2,26 @@ import isObj from "lodash.isplainobject";
 import { Required_v2 } from "../types/helper";
 
 type OPTION = {
-  space?: string;
-  eol?: string;
+  tabs?: boolean;
+  indentationCount?: number;
 };
 
 export const sortObject = (obj: Record<string, any>, option?: Partial<OPTION>) => {
-  const defaultOption = { space: " ", eol: "\n" };
+  let space = "";
+  let eol = "\n";
 
-  const { eol, space }: Required_v2<OPTION, keyof typeof defaultOption> = {
+  const defaultOption = { tabs: false, indentationCount: 0 };
+
+  let { indentationCount, tabs }: Required_v2<OPTION, keyof typeof defaultOption> = {
     ...defaultOption,
     ...option,
   };
+
+  if (tabs) {
+    space = "\t".repeat(indentationCount);
+  } else {
+    space = " ".repeat(indentationCount);
+  }
 
   const formatString = (v: string) => v.replace(/\n/g, "\\n").replace(/"/g, '\\"');
   const sRepeat = (depth: number) => space.repeat(depth);
