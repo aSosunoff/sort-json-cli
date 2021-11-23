@@ -14,6 +14,7 @@ export const cli = meow(
       -h, --help             Shows this help
       -v, --version          Shows the current version
       -c, --ci               Only exits with non-zero code if files COULD BE sorted
+      -a, --arrays           Also sort any arrays if they contain only string elements
   
     Example
       Call anywhere using glob patterns. If you put them as string, this library
@@ -36,13 +37,13 @@ export const cli = meow(
         type: "boolean",
         alias: "s",
         default: false,
-      },
+      }, */
       arrays: {
         type: "boolean",
         alias: "a",
         default: false,
       },
-      pack: {
+      /* pack: {
         type: "boolean",
         alias: "p",
         default: false,

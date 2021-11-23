@@ -1,26 +1,39 @@
 import isObj from "lodash.isplainobject";
+import _ from "lodash";
+
 import { Required_v2 } from "../types/helper";
+
+const ascSort = (a: number, b: number) => a - b;
+const descSort = (a: number, b: number) => -a - b;
+
+const ascSortString = (a: string, b: string) => a.localeCompare(b);
+const descSortString = (a: string, b: string) => b.localeCompare(a);
 
 type OPTION = {
   tabs?: boolean;
   indentationCount?: number;
+  arrays?: boolean;
 };
 
 export const sortObject = (obj: Record<string, any>, option?: Partial<OPTION>) => {
   let space = "";
   let eol = "\n";
 
-  const defaultOption = { tabs: false, indentationCount: 0 };
+  const defaultOption = { tabs: false, indentationCount: 0, arrays: false };
 
-  let { indentationCount, tabs }: Required_v2<OPTION, keyof typeof defaultOption> = {
+  let {
+    indentationCount: k_indentationCount,
+    tabs: k_tabs,
+    arrays: k_arrays,
+  }: Required_v2<OPTION, keyof typeof defaultOption> = {
     ...defaultOption,
     ...option,
   };
 
-  if (tabs) {
-    space = "\t".repeat(indentationCount);
+  if (k_tabs) {
+    space = "\t".repeat(k_indentationCount);
   } else {
-    space = " ".repeat(indentationCount);
+    space = " ".repeat(k_indentationCount);
   }
 
   const formatString = (v: string) => v.replace(/\n/g, "\\n").replace(/"/g, '\\"');
@@ -46,16 +59,23 @@ export const sortObject = (obj: Record<string, any>, option?: Partial<OPTION>) =
         let array = "";
 
         if (obj[key].every(isStr)) {
-          array = `[${eol}${[...obj[key]]
-            // .sort((a, b) => a.localeCompare(b))
+          let arr = _.cloneDeep<string[]>(obj[key]);
+
+          if (k_arrays) arr.sort(ascSortString);
+
+          array = `[${eol}${arr
             .map((item) => `${sRepeat(depth + 1)}${getValue(item)}`)
             .join(`,${eol}`)}${eol}${indent}]`;
         } else if (obj[key].every(isNumber)) {
-          array = `[${[...obj[key]].sort((a, b) => a - b).join(",")}]`;
+          let arr = _.cloneDeep<number[]>(obj[key]);
+          arr.sort(ascSort);
+
+          array = `[${arr.join(",")}]`;
         } else if (obj[key].every(isObj)) {
           const indentInner = sRepeat(depth + 1);
+          let arr = _.cloneDeep<Record<string, any>[]>(obj[key]);
 
-          array = `[${eol}${[...obj[key]]
+          array = `[${eol}${arr
             .map(
               (item) =>
                 `${indentInner}{${eol}${work(item, depth + 2).join(`,${eol}`)}${eol}${indentInner}}`
