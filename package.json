@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start_old": "npx ts-node ./src/index.ts",
-    "start": "node --loader ts-node/esm ./src/index.ts -t",
+    "start": "node --loader ts-node/esm ./src/index.ts",
     "start_dist": "node ./dist/index.js",
     "s": "npx ts-node ./src/test.ts",
     "t": "npx ts-node ./src/t.ts",

@@ -1,0 +1,743 @@
+{
+  "AED": "AED",
+  "BHD": "BHD",
+  "DHS": "Dhs",
+  "KWD": "KWD",
+  "OMR": "OMR",
+  "SAR": "SAR",
+  "above_limit_of_amount_currency": "This purchase is above your spending limit of {{amount}} {{currency}} at this store. Remove item(s) from your cart and try again or choose another way to pay.",
+  "above_limit_of_amount_currency_without_value": "This purchase is above your spending limit at this store. Remove item(s) from your cart and try again or choose another way to pay.",
+  "add_a_new_card": "Add a new card",
+  "add_a_photo_of_the_back_of_your_emirates_id": "Add a photo of the <b>back of your Emirates ID</b> to help us check that you’re really you. We’ll need this from you only once.",
+  "add_emirates_id": "Add Emirates ID",
+  "add_national_id_details": "Add National ID details",
+  "advantages": {
+      "firstAdvantage": {
+          "description": "You pay what you see. {{newLine}} No extra charges when you pay on time.",
+          "title": "No hidden fees"
+      },
+      "secondAdvantage": {
+          "description": "All credit and debit cards accepted.",
+          "title": "No credit card? No problem!"
+      },
+      "thirdAdvantage": {
+          "description": "After completing your first purchase with {{newLine}} tabby, you'll get your own limit to spend {{newLine}} across all our partner websites.",
+          "title": "Yes to more shopping"
+      },
+      "title": {
+          "buyNow": "Buy Now.",
+          "enjoyNow": "Enjoy Now.",
+          "payLater": "Pay Later."
+      }
+  },
+  "almost_there": "Almost there!",
+  "applepay": "Apple Pay",
+  "approved": "approved",
+  "as_we_are_commited_to_supporting_responsible_shopping_habits": "As we are committed to supporting responsible shopping habits, tabby does not approve 100% of all orders. tabby uses different factors to determine whether orders are approved or not. To learn more visit our <a>help center.</a>",
+  "authorized": "authorized",
+  "back_to_cart": "Back to cart",
+  "bahrain_address": "",
+  "bahrain_email": "help@tabby.ai",
+  "bahrain_phone": "+973 13300233",
+  "by_continuing_i_accept_tabbys_terms_and_conditions": "By continuing, I accept tabby's <a>terms and conditions</a>.",
+  "calculator": {
+      "continue": "Continue",
+      "errorAboveLimit": "You can spend up to {{limit}} {{currency}} at this store",
+      "howItWorks": "See how it works",
+      "planUpdateInfo": "Your plan will be updated with the exact amount of your purchase at the cash register.",
+      "title": "Enter your purchase amount"
+  },
+  "card_number": "Card number",
+  "change_number": "Change number",
+  "checkout": {
+      "complete": "Complete your order",
+      "fields": {
+          "birthDate": {
+              "placeholder": "DD.MM.YYYY",
+              "status": {
+                  "invalid_value": "Please enter a valid date of birth",
+                  "required": "Date of birth is required"
+              },
+              "subtitle": "in Gregorian",
+              "title": "Date of Birth"
+          },
+          "birthDateHijri": {
+              "placeholder": "DD.MM.YYYY",
+              "status": {
+                  "invalid_value": "Please enter a valid date of birth",
+                  "required": "Date of birth is required"
+              },
+              "subtitle": "in Hijri",
+              "title": "Date of Birth"
+          },
+          "cardHolderName": {
+              "placeholder": "CARDHOLDER NAME",
+              "status": {
+                  "invalid_value": "Your cardholder name is invalid",
+                  "required": "Cardholder name is required"
+              }
+          },
+          "cardNumber": {
+              "placeholder": "CARD NUMBER",
+              "status": {
+                  "invalid_value": "Your card number is invalid",
+                  "required": "Card number is required"
+              }
+          },
+          "cvv": {
+              "placeholder": "CVV",
+              "status": {
+                  "invalid_value": "Please enter a valid CVV",
+                  "required": "CVV is required"
+              },
+              "title": "OTP code"
+          },
+          "email": {
+              "placeholder": "E-mail",
+              "status": {
+                  "invalid_value": "E-mail is incorrect",
+                  "required": "E-mail is required"
+              },
+              "title": "E-mail"
+          },
+          "expiryDate": {
+              "placeholder": "MM / YY",
+              "status": {
+                  "invalid_value": "Expiry date is incorrect",
+                  "required": "Expiry date is required"
+              },
+              "title": ""
+          },
+          "fullName": {
+              "status": {
+                  "invalid_value": "Full name is incorrect",
+                  "required": "Full name is required"
+              },
+              "title": "Full name"
+          },
+          "nationalId": {
+              "status": {
+                  "invalid_value": "Please enter a valid national ID number",
+                  "required": "National ID number is required"
+              },
+              "title": "ID Number"
+          },
+          "phone": {
+              "placeholder": "Mobile phone",
+              "status": {
+                  "invalid_value": "Please enter a valid mobile phone number",
+                  "required": "Phone number is required"
+              },
+              "title": "Phone number"
+          }
+      },
+      "monthlyBilling": {
+          "howItWorks": {
+              "list": [
+                {
+                  "desc": "First time using tabby simply link your card.",
+                  "title": "Set up your account"
+                },
+                {
+                  "desc": "Buy any number of times and spend up to {{limit}} {{currency}} during the month.",
+                  "title": "Check out with tabby"
+                },
+                {
+                  "desc": "Pay for all your purchases at the end of the month using any card.",
+                  "title": "Pay at the end of the month"
+                }
+              ],
+              "title": "How it works"
+          },
+          "preview": "Why pay every time you buy? Simply, check out with tabby and pay for all your purchases at the end of the month."
+      },
+      "payLater": {
+          "lastStep": {
+              "loanOnAuthorized": "Pay before {{date}} with your debit or credit card",
+              "loanOnDelivery": "Pay {{daysNumber}} days later with your debit or credit card"
+          },
+          "steps": [
+                        "Complete your order",
+                        "Receive your package and enjoy it"
+          ],
+          "title": "Buy now and pay before {{date}}",
+          "titleLoanAfterDelivery": "Buy now and pay later"
+      },
+      "signUp": "Sign up"
+  },
+  "checkoutSessionStatuses": {
+      "approved": "approved",
+      "authorized": "authorized",
+      "created": "created",
+      "error": "Payment method is not available",
+      "rejected": "rejected",
+      "sessionExpiresIn": "Your session ends in"
+  },
+  "choose_a_payment_method": "Choose a payment method",
+  "choose_another_payment_method": "Choose another payment method",
+  "choose_from_library": "Choose from library",
+  "choose_payment_method": "Choose a payment method",
+  "codeForm": {
+      "attemptPluralForm": [
+                "attempt",
+                "attempts"
+      ],
+      "attempts": "You have {{attempts}} {{attemptPluralForm}} left",
+      "oneTry": "One attempt",
+      "sendAnotherCode": "Send another code",
+      "somethingWrong": "Something wrong",
+      "title": "Enter your code",
+      "wrongCode": "Incorrect code"
+  },
+  "common": {
+      "change": "Change",
+      "goBackToMerchant": "Go back to {{merchant}}",
+      "nationalIdTitle": {
+          "bahrain": "ID",
+          "emirates": "Emirates ID",
+          "kuwait": "ID",
+          "saudi": "ID"
+      },
+      "numerals": {
+          "0": "0",
+          "1": "1",
+          "10": "10",
+          "11": "11",
+          "12": "12",
+          "13": "13",
+          "14": "14",
+          "15": "15",
+          "16": "16",
+          "17": "17",
+          "18": "18",
+          "19": "19",
+          "2": "2",
+          "20": "20",
+          "21": "21",
+          "22": "22",
+          "23": "23",
+          "24": "24",
+          "25": "25",
+          "26": "26",
+          "27": "27",
+          "28": "28",
+          "29": "29",
+          "3": "3",
+          "30": "30",
+          "31": "31",
+          "4": "4",
+          "5": "5",
+          "6": "6",
+          "7": "7",
+          "8": "8",
+          "9": "9"
+      },
+      "onlyNeed": "You'll only need to do this once",
+      "or": "or",
+      "plurals": {
+          "month": [
+                        "month",
+                        "months"
+          ],
+          "oneMonth": "",
+          "twoMonths": "",
+          "week": [
+                        "week",
+                        "weeks"
+          ]
+      }
+  },
+  "confirm_details": "Confirm details",
+  "confirmationCode": {
+      "description": "To confirm your phone number please enter the code we just sent to <span>{{phone}}</span>",
+      "title": "Confirm your phone number"
+  },
+  "connectionError": {
+      "desc": "You're offline. Please check your internet connection.",
+      "title": "Network Error"
+  },
+  "contactInfo": {
+      "bahrain": {
+          "address": "",
+          "email": "help@tabby.ai",
+          "phone": "+973 13300233"
+      },
+      "emirates": {
+          "address": "Tabby FZ-LLC, In5 Tech, Dubai Internet City",
+          "email": "help@tabby.ai",
+          "phone": "+800 82229"
+      },
+      "kuwait": {
+          "address": "",
+          "email": "help@tabby.ai",
+          "phone": "+965 22209239"
+      },
+      "saudi": {
+          "address": "7421 King Fahd Road, Al Olaya District Riyadh 12245-3143",
+          "email": "help@tabby.ai",
+          "phone": "+800 111 0999"
+      }
+  },
+  "continue": "Continue",
+  "count_payments_of_price": "{{count}} payments of {{price}} {{currency}}.",
+  "created": "created",
+  "creds": {
+      "features": [
+                "Use any debit or credit card",
+                "Pay {{percent}}% now and the rest later",
+                "Get up to {{limit}} {{currency}} spending limit"
+      ],
+      "title": "Sign up"
+  },
+  "cvv": "CVV",
+  "date_of_birth": "Date of birth",
+  "date_of_birth_in_gregorian": "Date of Birth in Gregorian",
+  "date_of_birth_in_hijri": "Date of Birth in Hijri",
+  "date_of_birth_is_required": "Date of birth is required",
+  "date_should_not_be_after_maximal_date": "Date should not be after maximal date",
+  "date_should_not_be_before_minimal_date": "Date should not be before minimal date",
+  "downpayment": {
+      "addNewCard": "Add a new card",
+      "callToAction": "Pay {{amount}} {{currency}}",
+      "description": "The remaining installments will be charged monthly",
+      "header": {
+          "bahrain": {
+              "installments": {
+                  "description": "You can pay the remaining installments by logging into your tabby account",
+                  "title": "Make the first payment now"
+              },
+              "payLater": {
+                  "description": "Your preferred option will be stored for future payments",
+                  "title": "Enter your card details"
+              }
+          },
+          "emirates": {
+              "installments": {
+                  "description": "The remaining installments will be charged automatically",
+                  "title": "Make the first payment now"
+              },
+              "payLater": {
+                  "description": "Your preferred option will be stored for future payments",
+                  "title": "Enter your card details"
+              }
+          },
+          "kuwait": {
+              "installments": {
+                  "description": "You can pay the remaining installments by logging into your tabby account",
+                  "title": "Make the first payment now"
+              },
+              "payLater": {
+                  "description": "Your preferred option will be stored for future payments",
+                  "title": "Enter your card details"
+              }
+          },
+          "saudi": {
+              "installments": {
+                  "description": "You can pay the remaining installments by logging into your tabby account",
+                  "title": "Make the first payment now"
+              },
+              "payLater": {
+                  "description": "Your preferred option will be stored for future payments",
+                  "title": "Enter your card details"
+              }
+          }
+      },
+      "pay": "Pay",
+      "title": "Make the first payment of {{amount}} {{currency}}",
+      "verifiedBy": "Verified by:"
+  },
+  "dropzoneUpload": {
+      "description": "Your privacy is very important to us. \nYour data is stored securely.",
+      "dropzone": {
+          "callToAction": "browse",
+          "description": "(The file size should not exceed 20Mb)",
+          "title": [
+                        "Drag and drop an image",
+                        "or {{browse}} to choose a file"
+          ]
+      },
+      "title": "Take a photo of the back of your {{nationalIdTitle}} to help us identify you"
+  },
+  "due_to_inactivity_your_session_has_expired": "Due to inactivity your session has expired. That’s okay, you can start again where you left off.",
+  "due_today": "Due today",
+  "due_today_price": "Due today {{price}}",
+  "emirates_address": "Tabby FZ-LLC, In5 Tech, Dubai Internet City",
+  "emirates_email": "help@tabby.ai",
+  "emirates_id": "Emirates ID",
+  "emirates_phone": "+800 82229",
+  "enter_the_4_digit_code_we_sent_to_your_mobile_number": "Enter the 4-digit code we sent to your mobile number",
+  "enter_your_mobile_number_to_get_the_verification_code": "Enter your mobile number to get the verification code",
+  "error": "Payment method is not available",
+  "error_reference_number": "Error reference number",
+  "expiry": "Expiry date",
+  "expiry_placeholder": "MM/YY",
+  "feePeriod": {
+      "p1m": "monthly",
+      "p2w": "bi-weekly"
+  },
+  "final": {
+      "checkout": {
+          "description": {
+              "installments": {
+                  "loanOnAuthorized": "Your next payment is due on <b>{{date}}</b>",
+                  "loanOnDelivery": "Your next payment will be due {{date}} after you receive your order."
+              },
+              "payLater": {
+                  "loanOnAuthorized": "Your payment is due on <b>{{date}}</b>",
+                  "loanOnDelivery": "Your payment will be due {{daysNumber}} days after you receive your order.",
+                  "monthlyBilling": "Your payment will be due in the end of the month."
+              }
+          },
+          "gratitude": "Thank you for using tabby!",
+          "title": "Please wait while we confirm your order"
+      },
+      "description": {
+          "installments": {
+              "loanOnAuthorized": "Your next payment is due on <b>{{date}}</b>",
+              "loanOnDelivery": "Your next payment will be due {{date}} after you receive your order."
+          },
+          "payLater": {
+              "loanOnAuthorized": "Your payment is due on <b>{{date}}</b>",
+              "loanOnDelivery": "Your payment will be due {{daysNumber}} days after you receive your order."
+          }
+      },
+      "gratitude": "Thank you for using tabby!",
+      "instore": {
+          "callToAction": "Log in to manage your orders",
+          "firstPaymentInfo": "The first payment of <b>{{amount}} {{currency}}</b> was made today.",
+          "nextPaymentInfo": "Your next payment is due on <b>{{dueDate}}</b>",
+          "snippet": {
+              "amountPerPeriod": "{{amount}} {{currency}}",
+              "fee": "including {{amount}} {{currency}} fee",
+              "payments": "Your {{period}} payments are:",
+              "periodShort": {
+                  "p1m": "/mo*",
+                  "p2w": "/bi-weekly*"
+              }
+          },
+          "title": "You're all set!"
+      },
+      "registration": {
+          "snippetText": "You're all set! \n Place your order and enjoy paying at the end of the month!",
+          "whatsNext": {
+              "list": [
+                {
+                  "desc": "Complete your order and put it on your tab",
+                  "title": "Select tabby at checkout"
+                },
+                {
+                  "desc": "Link your debit or credit card and we'll automatically charge you at the end of the month",
+                  "title": "Pay at the end of the month"
+                }
+              ],
+              "title": "What's next?"
+          }
+      }
+  },
+  "full_name": "Full name",
+  "full_name_is_incorrect": "Full name is incorrect",
+  "full_name_is_required": "Full name is required",
+  "galleryUpload": {
+      "camera": "Take a photo",
+      "card": {
+          "title": "{{nationalIdTitle}} back side"
+      },
+      "description": "Your privacy is very important to us. \nYour data is stored securely.",
+      "errors": {
+          "sizeLimit": "File size limit 20Mb",
+          "somethingWrong": "Something went wrong. \n Please, try again"
+      },
+      "photo": "Upload a photo",
+      "title": "Take a photo of the back of your {{nationalIdTitle}} to help us identify you"
+  },
+  "header": {
+      "installments": {
+          "description": "Use any debit or credit card to repay",
+          "title": "Pay in monthly installments",
+          "title1plan": "Pay in installments in {{terms}} {{period}}"
+      },
+      "logo": "Tabby Logo",
+      "payLater": {
+          "description": "No card required",
+          "descriptionForBankCardRequired": "Enter your card details, and pay later",
+          "titleLoanOnAuthorized": "Buy now and pay later",
+          "titleLoanOnDelivery": "Pay {{daysNumber}} days after delivery"
+      }
+  },
+  "idConfirm": {
+      "callToAction": "Buy now",
+      "description": "Please enter the information as stated on your National ID or Residency (Iqama)",
+      "prompt": {
+          "installments": "By clicking \"BUY NOW\", you are agreeing to pay tabby within {{period}} after receiving your order. Failure to pay on time will incur late fees and may affect your credit score.",
+          "payLater": "By clicking \"BUY NOW\", you are agreeing to pay tabby up to 14 days after receiving your order. Failure to pay on time will incur late fees and may affect your credit score"
+      },
+      "title": "Help us identify you"
+  },
+  "id_number": "ID number",
+  "identityConfirmationCode": {
+      "description": "SMS is sent to the phone number linked with your Absher account",
+      "title": "Validate your data with Absher"
+  },
+  "in_1_month": "In 1 month",
+  "in_2_month": "in 2 months",
+  "in_3_month": "in 3 months",
+  "installmentPlan": {
+      "description": "{{amount}} {{currency}} installments fee per month",
+      "descriptionNoServiceFee": "Monthly fee is waived for this purchase",
+      "downpayment": "Pay {{amount}} {{currency}} now and the rest later",
+      "each": "Each {{period}}",
+      "every": "Every {{regularity}} {{period}}",
+      "title": "Choose your payment plan",
+      "titleIfSingleInstallment": "Here's your installment plan"
+  },
+  "internalServerError": {
+      "callToAction": "BACK TO CART",
+      "description": "Something went wrong and we’re not too sure what it is right now. While we figure it out, please try again.",
+      "old": {
+          "title": [
+                        "Uh oh!",
+                        "Something went completely wrong.",
+                        "But we're on it. Try again!"
+          ]
+      },
+      "requestId": "Error reference number",
+      "title": "Well, that’s embarrassing."
+  },
+  "invalid_cvv": "Invalid CVV",
+  "invalid_date": "Invalid expiry date",
+  "invalid_date_format": "Invalid Date Format",
+  "invalid_mobile_number": "Invalid mobile number",
+  "ksa": "KSA",
+  "kuwait_address": "",
+  "kuwait_email": "help@tabby.ai",
+  "kuwait_phone": "+965 22209239",
+  "link_your_number_to_tabby": "Link your number to tabby",
+  "loadingSteps": {
+      "after3sec": "This may take a few seconds...",
+      "after6sec": "We're nearly done..."
+  },
+  "log_in_or_sign_up": "Log in or Sign up",
+  "make_a_payment": "Make a payment",
+  "make_sure_to_upload_a_clear_image_of_the_back_of_your_emirates_id": "Make sure to upload a clear image of the back of your Emirates ID. We value your privacy and all your data is encrypted when stored.",
+  "make_sure_your_details": "Make sure your details are correct. This cannot be changed later. Need help? Contact us",
+  "merchantConfirmation": {
+      "address": "QR-code allows purchases in {{merchant}} {{address}}",
+      "expiration": "This code expires in",
+      "showBarCode": "Show this QR or PIN code at the cashier desk",
+      "title": "Congrats! You've got {{amount}} {{currency}} <br /> to spend at {{merchant}}"
+  },
+  "national_id_required": "National ID number is required",
+  "no_interest_no_fees": "No interest. No fees.",
+  "number_does_not_belong_to_the_current_country": "Please enter a valid {{country}} phone number",
+  "order_total": "Order total",
+  "pay_amount_currency": "Pay {{amount}} {{currency}}",
+  "pay_now_and_the_rest_later": "Pay {{amount}} {{currency}} now and the rest later",
+  "pay_tabby_instalment": "Pay tabby installment",
+  "pay_with": "Pay with",
+  "pay_with_debit_or_credit_cards": "Pay with debit or credit cards",
+  "pay_with_tabby": "Pay with tabby",
+  "paymentRejected": {
+      "buttonTitle": {
+          "backToStore": "Back to store",
+          "onlyEmailMatched": "Change phone number",
+          "onlyPhoneMatched": "Change email",
+          "payNow": "Pay now",
+          "tryAgain": "Try again"
+      },
+      "changePaymentMethod": "Choose another payment method",
+      "reason": {
+          "blockedUser": {
+              "main": "We’ve noticed suspicious activity on your account.",
+              "unlockInfo": "It’s locked till {{unlockDate}}."
+          },
+          "notAccepted": {
+              "description": "Please verify your payment details or try another card.",
+              "old": "Sorry, your payment was not accepted. Please try again with a different card.",
+              "title": "Oh no, your payment failed."
+          },
+          "notAvailable": {
+              "answer": "Unfortunately you're unable to purchase using tabby at this time. Please use an alternative payment method for your order.",
+              "description": "As we are committed to supporting responsible shopping habits, tabby does not approve 100% of all orders. tabby uses different factors to determine whether orders are approved or not. To learn more visit our {{link}}.",
+              "old": "Sorry, we’re not a good fit at this time and cannot approve this purchase. Please choose another payment method.",
+              "question": "What can I do?",
+              "title": "Sorry, we're unable to approve this purchase."
+          },
+          "notEnoughLimit": {
+              "description": "This purchase is above your spending limit of {{maxAmount}} {{currency}}. Remove item(s) from your cart and try again or choose another way to pay.",
+              "old": "We're sorry, but this purchase is above your spending limit of {{limit}} {{currency}} available at this store.",
+              "title": "Try a smaller cart."
+          },
+          "overdue": "You have an overdue payment. Once you make your payment, you will be able to shop again using tabby",
+          "payFirstInstallment": {
+              "description": "Please pay the next installment of your last purchase with tabby. You'll be able to make more purchases with tabby as you build a good payment history. To learn more visit our {{link}}.",
+              "helpCenter": "help center",
+              "old": "Sorry, we couldn’t approve this purchase yet as we get to know each other. Paying your outstanding balances may help unlock more shopping with tabby",
+              "pay": "PAY TABBY INSTALLMENT",
+              "title": "To purchase with tabby, make your next payment."
+          },
+          "payFirstPurchase": "Pay for your first purchase so you can buy more with tabby",
+          "payOutstandingBalance": "Sorry, we couldn’t approve this purchase. Paying your outstanding balances may help unlock more shopping with tabby",
+          "sessionExpired": {
+              "description": "Due to inactivity your session has expired. That’s okay, you can start again where you left off.",
+              "old": "Sorry, your session expired. Please place a new order.",
+              "title": "Oh no, your session expired."
+          },
+          "underLimit": {
+              "description": "There’s a minimum cart size of {{minAmount}} {{currency}} to pay with tabby. Add more items to your cart and try again or choose another way to pay.",
+              "old": "This purchase is below the minimum amount of {{minAmount}} {{currency}} required to shop with tabby.",
+              "title": "Try adding more items."
+          },
+          "xMatching": {
+              "onlyEmailMatched": {
+                  "description": "It looks like you previously signed up with tabby using another phone number. Please login using {{phone}}.",
+                  "old": "It looks like you previously registered with tabby using a different phone number. Please use <b>{{phone}}</b> to proceed.",
+                  "title": "Login with your registered phone number."
+              },
+              "onlyPhoneMatched": {
+                  "description": "It looks like you previously signed up with tabby using another email address. Please login using {{email}}",
+                  "old": "It looks like you previously registered with tabby using a different email. Please use <b>{{email}}</b> to proceed.",
+                  "title": "Login with your registered email address."
+              }
+          }
+      }
+  },
+  "placeholder_email": "Email",
+  "placeholder_phone": "Mobile number",
+  "please_add_your_national_id_details": "Please add your National ID details to help us check that you’re really you. We’ll need this from you only once.",
+  "please_check_your_cvv": "Please check your CVV",
+  "please_enter_a_valid_card_number": "Please enter a valid card number",
+  "please_enter_a_valid_code": "Please enter a valid code",
+  "please_enter_a_valid_date_of_birth": "Please enter a valid date of birth",
+  "please_enter_a_valid_email": "Please enter a valid email",
+  "please_enter_a_valid_expiration_date": "Please enter a valid expiry date",
+  "please_enter_a_valid_phone_number": "Please enter a valid mobile number",
+  "please_enter_the_information_stated_on_your_national_id": "Please enter the information stated on your National ID or residency (Iqama).",
+  "please_enter_valid_national_id": "Please enter a valid national ID number",
+  "please_enter_your_email": "Please enter your email",
+  "please_enter_your_phone_number": "Please enter your mobile number",
+  "please_pay_for_your_first_purchase": "Please pay for your first purchase so you can shop more with tabby. You'll be able to make more purchases with tabby as you build a good payment history. To learn more visit our <a>help center.</a>",
+  "please_pay_the_next_instalment": "Please pay the next installment of your last purchase with tabby. You'll be able to make more purchases with tabby as you build a good payment history. To learn more visit our <a>help center.</a>",
+  "please_pay_your_outstanding_balances": "Please, pay your outstanding balances",
+  "please_settle_your_overdue_payment": "Please settle your overdue payment.",
+  "please_upload_an_image_of_the_back_of_your_id_again": "Please upload an image of the back of your ID again.",
+  "please_verify_your_payment_details": "Please verify your payment details or try another card.",
+  "please_wait_while_we_confirm_your_order": "Your payment was successful. We will email you the order cofirmation.",
+  "previously_registered_using_different_email": "It looks like you previously registered with tabby using a different email. Please use <phone>{{suggestion}}</phone> to proceed.",
+  "previously_registered_using_different_phone": "It looks like you previously registered with tabby using a different phone number. Please use <phone>{{suggestion}}</phone> to proceed.",
+  "proceed_with_tabby": "Proceed with tabby",
+  "purchase": {
+      "backToQrCode": "Back to QR code",
+      "callToAction": "Buy Now",
+      "prompt": "By clicking \"BUY NOW\", you are agreeing to pay Tabby within {{period}}. Failure to pay on time will incur late fees and may affect your credit score.",
+      "title": "Your purchase amount is {{amount}} {{currency}}."
+  },
+  "rejected": "rejected",
+  "saudi_address": "7421 King Fahd Road, Al Olaya District Riyadh 12245-3143",
+  "saudi_email": "help@tabby.ai",
+  "saudi_phone": "+800 111 0999",
+  "scanConfirm": {
+      "back": "Upload again",
+      "callToAction": "Buy now",
+      "description": "Check your name and {{nationalIdTitle}} number",
+      "fields": {
+          "name": {
+              "title": "Full name"
+          }
+      },
+      "prompt": {
+          "installments": "By clicking \"BUY NOW\", you are agreeing to pay tabby within {{period}} after receiving your order. Failure to pay on time will incur late fees and may affect your credit score.",
+          "payLater": "By clicking \"BUY NOW\", you are agreeing to pay tabby up to 14 days after receiving your order. Failure to pay on time will incur late fees and may affect your credit score"
+      },
+      "title": "Confirm your data",
+      "uploadTitle": "Please wait while we confirm your details"
+  },
+  "scanError": {
+      "callToAction": "Upload again",
+      "title": "We couldn’t read your data. Please make sure you are uploading a photo of the back side of your {{nationalIdTitle}} and try again"
+  },
+  "schedule": {
+      "first": "First payment",
+      "last": "Last payment",
+      "loanAfterDelivery": "{{terms}} {{period}} after delivery",
+      "next": "Next payment",
+      "paymentsInterim": {
+          "P1M": "monthly payments",
+          "P2W": "bi-weekly payments"
+      },
+      "today": "Today"
+  },
+  "see_payment_schedule": "See payment schedule",
+  "send_another_code": "Send another code",
+  "sent_to_phone_number": "Sent to phone number {{phone}}",
+  "sent_to_phone_number_linked_to_your_id": "Sent to phone number linked to your ID.",
+  "sessionExpiresIn": "Your session ends in",
+  "session_expired": "Oh no, your session expired.",
+  "simahInfo": "tabby is integrated with SIMAH and reports back consumer credit data as required by the Saudi Credit Bureau.",
+  "something_went_wrong": "Something went wrong",
+  "something_went_wrong_and_we_are_not_too_sure_what_is_it": "Something went wrong and we’re not too sure what it is right now. While we figure it out, please try again.",
+  "something_went_wrong_please_try_send_another_code": "Something went wrong, please try send another code",
+  "something_wrong": "Something went wrong. \n Please, try again",
+  "sorry_we_are_unable_to_approve_this_purchase": "Sorry, we're unable to approve this purchase.",
+  "sorry_we_couldnt_approve_this_purchase": "Sorry, we couldn’t approve this purchase. Paying your outstanding balances may help unlock more shopping with tabby.  To learn more visit our <a>help center.</a>",
+  "tabbyCard": {
+      "4 interest-free payments of": "4 interest-free payments of {{price}} {{currency}}",
+      "In 1 month": "In 1 month",
+      "In 2 month": "In 2 month",
+      "In 3 month": "In 3 month",
+      "No fees": "Get what you love, split the cost. No fees."
+  },
+  "tabbyCard:Today": "Today",
+  "tabby_is_integrated_with_simah": "tabby is integrated with SIMAH and reports back consumer credit data as required by the Saudi Credit Bureau.",
+  "take_photo": "Take a photo",
+  "terms": "Accept Terms & Conditions",
+  "text for Arabic snippet": "or 4 interest-free payments of <value> <currency>. ",
+  "text for ikea snippet": "4 interest-free monthly payments.",
+  "the_file_size_was_too_big": "The file size was too big. Please try again.",
+  "there_is_a_minimum_cart_size_of_amount_currency": "There’s a minimum cart size of {{amount}} {{currency}} to pay with tabby. Add more items to your cart and try again or choose another way to pay.",
+  "there_is_a_minimum_cart_size_of_amount_currency_without_value": "There’s a minimum cart size to pay with tabby. Add more items to your cart and try again or choose another way to pay.",
+  "thirdPartyCookiesBlock": "Please exit incognito mode or switch to another browser",
+  "timer": {
+      "units": "sec."
+  },
+  "to_complete_your_purchase_pay_your_remaining_balance": "To complete your purchase, pay your remaining balance. To learn more visit our <a>help center.</a>",
+  "to_purchase_with_tabby_make_your_next_payment": "To purchase with tabby, make your next payment.",
+  "today": "Today",
+  "total": {
+      "fee": {
+          "installments": "{{amount}} {{currency}} {{feePeriod}} fee",
+          "payLater": "{{amount}} {{currency}} service fee"
+      },
+      "main": "Total: {{amount}} {{currency}}",
+      "zeroFee": "No interest, no fees"
+  },
+  "try_a_smaller_cart": "Try a smaller cart.",
+  "try_adding_more_items": "Try adding more items.",
+  "try_again": "Try again",
+  "uae": "UAE",
+  "unfortunately_you_are_unable_to_purchase_using_tabby": "Unfortunately you're unable to purchase using tabby at this time. Our customer service team is not able to change the automated outcome of the approval decision. Please use an alternative payment method for your order.",
+  "upload_a_file": "Upload a file",
+  "upload_again": "Upload again",
+  "use_any_card": "Use any card",
+  "verificationBankCard": {
+      "callToAction": "Save my card details",
+      "description": "We'll charge 1 {{currency}} to confirm your card now. <br /> You can then pay for your order in 14 days.",
+      "title": "Enter your card details"
+  },
+  "verify_4-digit_code": "Verify 4-digit code",
+  "verify_4_digit_code": "Verify 4-digit code",
+  "verify_your_absher_code": "Verify your Absher code",
+  "verify_your_emirates_id": "Verify your details are exactly as per your Emirates ID.",
+  "verify_your_identity": "Verify your identity",
+  "we_have_noticed_suspicious_activity": "We've noticed suspicious activity on your account. It's locked until {{date}}. To learn more visit our <a>help center.</a>",
+  "we_will_send_sms_reminder": "We’ll send you an SMS reminder before your next payment.",
+  "well_that_is_embarrassing": "Well, that’s embarrassing.",
+  "what_can_i_do": "What can I do?",
+  "you_have_exceeded_the_number_of_attempts": "You have exceeded the number of attempts",
+  "you_have_exceeded_the_number_of_attempts_description": "You've exceeded the number of attemps. Please change your number and try again.",
+  "your_next_payment_is_due_on_date": "Your next payment is due on {{date}}",
+  "your_payment_failed": "Oh no, your payment failed.",
+  "your_privacy_and_security_is_important_to_us": "Your privacy and security is important to us, and your data is stored confidentially",
+  "your_privacy_and_security_is_important_to_us_we_will_need_this_only_once": "Your privacy and security is important to us. Your data is stored confidentially and we’ll need this from you only once.",
+  "your_privacy_and_security_is_important_to_us_well_need_this_only_once": "Your privacy and security is important to us. Your data is stored confidentially and we’ll need this from you only once.",
+  "your_session_ends_in_time": "Your session ends in {{time}}"
+}
