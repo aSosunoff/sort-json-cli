@@ -36,7 +36,7 @@ export const sortObject = (obj: Record<string, any>, option?: Partial<OPTION>) =
     const content: string[] = [];
 
     for (const key of keys) {
-      const indent = sRepeat(depth * 2);
+      const indent = sRepeat(depth);
 
       if (isObj(obj[key])) {
         content.push(
@@ -48,12 +48,12 @@ export const sortObject = (obj: Record<string, any>, option?: Partial<OPTION>) =
         if (obj[key].every(isStr)) {
           array = `[${eol}${[...obj[key]]
             // .sort((a, b) => a.localeCompare(b))
-            .map((item) => `${sRepeat((depth + 1) * 2)}${getValue(item)}`)
+            .map((item) => `${sRepeat(depth + 1)}${getValue(item)}`)
             .join(`,${eol}`)}${eol}${indent}]`;
         } else if (obj[key].every(isNumber)) {
           array = `[${[...obj[key]].sort((a, b) => a - b).join(",")}]`;
         } else if (obj[key].every(isObj)) {
-          const indentInner = sRepeat((depth + 1) * 2);
+          const indentInner = sRepeat(depth + 1);
 
           array = `[${eol}${[...obj[key]]
             .map(
