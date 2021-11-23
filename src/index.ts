@@ -18,7 +18,16 @@ if (cli.flags.version) {
   process.exit(0);
 }
 
-console.log(cli.input);
+let indentationCount = 2;
+if (cli.flags.tabs) {
+  indentationCount = 1;
+}
+
+if (cli.flags.indentationCount) {
+  indentationCount = +cli.flags.indentationCount;
+}
+
+log(cli.input);
 
 (async () => {
   const obj = await getObjFromJsonFile(path.resolve(__dirname, "./source.json"));
@@ -28,7 +37,10 @@ console.log(cli.input);
     return;
   }
 
-  const content = sortObject(obj);
+  const content = sortObject(obj, {
+    tabs: cli.flags.tabs,
+    indentationCount,
+  });
 
   await saveFile(path.resolve(__dirname, "./target.json"), content);
 })();
