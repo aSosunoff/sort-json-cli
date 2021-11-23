@@ -67,10 +67,10 @@ export const cli = meow(
         alias: "v",
         default: false,
       },
-      /* indentationCount: {
+      indentationCount: {
         type: "number",
         alias: "i",
-      }, */
+      },
     },
   }
 );
