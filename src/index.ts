@@ -1,8 +1,10 @@
 import path from "path";
 
 import { cli } from "./utils/cli.js";
-import { readFile } from "./utils/read-file.js";
+import { getObjFromJsonFile } from "./utils/get-obj-from-json-file.js";
 import { getDirname } from "./utils/fix-dirname.js";
+import { sortObject } from "./utils/sort-object.js";
+import { saveFile } from "./utils/save-file.js";
 
 const __dirname = getDirname(import.meta);
 
@@ -16,4 +18,17 @@ if (cli.flags.version) {
   process.exit(0);
 }
 
-readFile(path.resolve(__dirname, "./source.json"));
+console.log(cli.input);
+
+(async () => {
+  const obj = await getObjFromJsonFile(path.resolve(__dirname, "./source.json"));
+
+  if (!obj) {
+    // TODO: info to console
+    return;
+  }
+
+  const content = sortObject(obj);
+
+  await saveFile(path.resolve(__dirname, "./target.json"), content);
+})();
