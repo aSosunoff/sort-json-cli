@@ -27,7 +27,7 @@ if (cli.flags.indentationCount) {
   indentationCount = +cli.flags.indentationCount;
 }
 
-log(cli.input);
+/* log(cli.input); */
 
 (async () => {
   const obj = await getObjFromJsonFile(path.resolve(__dirname, "./source.json"));
