@@ -15,7 +15,7 @@ type OPTION = {
   arrays?: boolean;
 };
 
-export const sortObject = (obj: Record<string, any>, option?: Partial<OPTION>) => {
+export const sortObject = (obj: Record<string, any>, option?: OPTION) => {
   let space = "";
   let eol = "\n";
 
