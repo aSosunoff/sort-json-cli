@@ -17,7 +17,10 @@ export const readSortAndWriteFile = async (oneOfPaths: string) => {
 
     const content = sortObject(obj, {
       tabs: cli.flags.tabs,
-      indentationCount: getIndentationCount(),
+      indentationCount: getIndentationCount({
+        indentationCount: cli.flags.indentationCount,
+        tabs: cli.flags.tabs,
+      }),
     });
 
     let pathToFile = oneOfPaths;
