@@ -1,5 +1,4 @@
 import { Required_v2 } from "../types/helper.js";
-import { cli } from "./cli.js";
 
 export const prefix = "✨ sort-json-cli: ";
 
