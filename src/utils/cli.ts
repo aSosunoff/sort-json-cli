@@ -9,15 +9,17 @@ export const cli = meow(
     or, just type "jsonsort" and it will let you pick a file.
   
     Options
+      -r, --target          Save to target file
       -n, --nodemodules      Don't ignore any node_modules folders
       -t, --tabs             Use tabs for JSON file indentation
       -i, --indentationCount How many spaces or tabs to use (default = 2 spaces or 1 tab)
+      -s, --silent           Does not show the result per-file, only totals in the end
       -h, --help             Shows this help
       -v, --version          Shows the current version
-      -c, --ci               Only exits with non-zero code if files COULD BE sorted
       -a, --arrays           Also sort any arrays if they contain only string elements
+      -d, --dry              Only list all the files about to be processed
       -p, --pack             Exclude all package.json files
-      -ta, --target          Save to target file
+      -c, --ci               Only exits with non-zero code if files COULD BE sorted
   
     Example
       Call anywhere using glob patterns. If you put them as string, this library
@@ -41,11 +43,11 @@ export const cli = meow(
         alias: "r",
         default: false,
       },
-      /* silent: {
+      silent: {
         type: "boolean",
         alias: "s",
         default: false,
-      }, */
+      },
       arrays: {
         type: "boolean",
         alias: "a",
@@ -56,12 +58,12 @@ export const cli = meow(
         alias: "p",
         default: false,
       },
-      /* dry: {
+      dry: {
         type: "boolean",
         alias: "d",
         default: false,
       },
-      ci: {
+      /* ci: {
         type: "boolean",
         alias: "c",
         default: false,
