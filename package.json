@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start_old": "npx ts-node ./src/index.ts",
-    "start": "node --loader ts-node/esm ./src/index.ts",
+    "start": "node --loader ts-node/esm ./src/index.ts ./src -r",
     "start_dist": "node ./dist/index.js",
     "s": "npx ts-node ./src/test.ts",
     "t": "npx ts-node ./src/t.ts",
@@ -16,9 +16,13 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "fs-extra": "^10.0.0",
+    "globby": "^12.0.2",
+    "is-d": "^1.0.0",
     "lodash": "^4.17.21",
     "lodash.isplainobject": "^4.0.6",
     "meow": "^10.1.1",
+    "p-filter": "^3.0.0",
+    "p-reduce": "^3.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   },
