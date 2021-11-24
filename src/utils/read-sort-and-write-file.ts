@@ -2,10 +2,10 @@ import chalk from "chalk";
 import path from "path";
 
 import { cli } from "./cli.js";
-import { getIndentationCount, prefix } from "./constant";
-import { getObjFromJsonFile } from "./get-obj-from-json-file";
-import { saveFile } from "./save-file";
-import { sortObject } from "./sort-object";
+import { getIndentationCount, prefix } from "./constant.js";
+import { getObjFromJsonFile } from "./get-obj-from-json-file.js";
+import { saveFile } from "./save-file.js";
+import { sortObject } from "./sort-object.js";
 
 const log = console.log;
 
