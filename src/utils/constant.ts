@@ -1,16 +1,32 @@
+import { Required_v2 } from "../types/helper.js";
 import { cli } from "./cli.js";
 
 export const prefix = "✨ sort-json-cli: ";
 
-export const getIndentationCount = () => {
+type INDENTATION_COUNT_OPTION = {
+  tabs?: boolean;
+  indentationCount?: number;
+};
+
+export const getIndentationCount = (option?: INDENTATION_COUNT_OPTION) => {
+  const defaultOption = { tabs: false, indentationCount: 0 };
+
+  let {
+    indentationCount: k_indentationCount,
+    tabs: k_tabs,
+  }: Required_v2<INDENTATION_COUNT_OPTION, keyof typeof defaultOption> = {
+    ...defaultOption,
+    ...option,
+  };
+
   let indentationCount = 2;
 
-  if (cli.flags.tabs) {
+  if (k_tabs) {
     indentationCount = 1;
   }
 
-  if (cli.flags.indentationCount) {
-    indentationCount = +cli.flags.indentationCount;
+  if (k_indentationCount) {
+    indentationCount = +k_indentationCount;
   }
 
   return indentationCount;
