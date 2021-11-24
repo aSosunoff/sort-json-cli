@@ -112,12 +112,12 @@ if (cli.flags.version) {
 
           return res
             ? {
-                good: counter.good.concat([currentPath]),
-                bad: counter.bad,
+                ...counter,
+                good: counter.good.concat(currentPath),
               }
             : {
-                good: counter.good,
-                bad: counter.bad.concat([currentPath]),
+                ...counter,
+                bad: counter.bad.concat(currentPath),
               };
         } catch (err) {
           /* istanbul ignore next */
