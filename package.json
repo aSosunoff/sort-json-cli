@@ -1,6 +1,6 @@
 {
   "name": "sort-json-cli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "command line app to deep sort JSON files, retains package.json special key order",
   "homepage": "https://github.com/aSosunoff/sort-json-cli",
   "author": {
@@ -17,9 +17,17 @@
     "url": "git://github.com/aSosunoff/sort-json-cli"
   },
   "keywords": [
+    "ci",
+    "app",
+    "cli",
+    "command line",
+    "file",
+    "files",
+    "fix",
     "json",
     "sort",
-    "ci"
+    "tool",
+    "utility"
   ],
   "files": [
     "/dist",
@@ -29,11 +37,16 @@
   "publishConfig": {
     "access": "public"
   },
+  "bin": {
+    "sortjsoncli": "index.js"
+  },
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "start": "node --loader ts-node/esm ./src/index.ts ./src/source.json",
     "build": "npx tsc",
-    "deploy": "gh-pages -d build",
-    "deploy_to_npm": "npm run build && npm run deploy && npm publish && git add . && git commit -m \"deploy to npm\" && git push",
+    "deploy_to_npm": "npm run build && npm publish && git add . && git commit -m \"deploy to npm\" && git push",
     "s": "npx ts-node ./src/test.ts",
     "t": "npx ts-node ./src/t.ts"
   },
@@ -53,8 +66,7 @@
     "@types/fs-extra": "^9.0.13",
     "@types/lodash.isplainobject": "^4.0.6",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.2",
-    "gh-pages": "^3.2.3"
+    "typescript": "^4.5.2"
   },
   "type": "module"
 }
