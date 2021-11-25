@@ -32,6 +32,8 @@
   "scripts": {
     "start": "node --loader ts-node/esm ./src/index.ts ./src/source.json",
     "build": "npx tsc",
+    "deploy": "gh-pages -d build",
+    "deploy_to_npm": "npm run build && npm run deploy && npm publish && git add . && git commit -m \"deploy to npm\" && git push",
     "s": "npx ts-node ./src/test.ts",
     "t": "npx ts-node ./src/t.ts"
   },
@@ -45,13 +47,14 @@
     "meow": "^10.1.1",
     "p-filter": "^3.0.0",
     "p-reduce": "^3.0.0",
-    "sort-package-json": "^1.53.1",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.2"
+    "sort-package-json": "^1.53.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
-    "@types/lodash.isplainobject": "^4.0.6"
+    "@types/lodash.isplainobject": "^4.0.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2",
+    "gh-pages": "^3.2.3"
   },
   "type": "module"
 }
