@@ -3,10 +3,7 @@ import meow from "meow";
 export const cli = meow(
   `
     Usage
-      $ jsonsort YOURFILE.json
-      $ sortjson YOURFILE.json
-      $ sortjson templatesfolder1 templatesfolder2 package.json
-    or, just type "jsonsort" and it will let you pick a file.
+      $ sortjsoncli YOURFILE.json
   
     Options
       -r, --target          Save to target file
@@ -63,11 +60,11 @@ export const cli = meow(
         alias: "d",
         default: false,
       },
-      /* ci: {
+      ci: {
         type: "boolean",
         alias: "c",
         default: false,
-      },*/
+      },
       help: {
         type: "boolean",
         alias: "h",
