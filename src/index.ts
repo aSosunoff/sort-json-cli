@@ -22,86 +22,98 @@ if (cli.flags.version) {
 //#endregion
 
 (async () => {
-  let paths = await globby(cli.input, { dot: true });
+  try {
+    let paths = await globby(cli.input, { dot: true });
 
-  if (paths.length === 0 && !cli.flags.silent) {
-    log(`${chalk.grey(prefix)}${chalk.red("The inputs don't lead to any json files! Exiting.")}`);
+    //#region The inputs don't lead to any json files! Exiting.
+    if (paths.length === 0 && !cli.flags.silent) {
+      log(`${chalk.grey(prefix)}${chalk.red("The inputs don't lead to any json files! Exiting.")}`);
 
-    process.exit(0);
-  }
+      process.exit(0);
+    }
+    //#endregion
 
-  paths = await pReduce<string, string[]>(
-    paths,
-    async (concattedTotal, singleDirOrFilePath) => {
-      const isDir = await isDirectory(singleDirOrFilePath);
+    //#region if found directory path
+    paths = await pReduce<string, string[]>(
+      paths,
+      async (concattedTotal, singleDirOrFilePath) => {
+        const isDir = await isDirectory(singleDirOrFilePath);
 
-      if (isDir) {
-        const pGlobby = await globby(
-          cli.flags.nodemodules
-            ? singleDirOrFilePath
-            : [singleDirOrFilePath, "!**/node_modules/**"],
-          {
-            expandDirectories: {
-              files: [".*", "*.json"],
-            },
-          }
-        );
+        if (isDir) {
+          const pGlobby = await globby(
+            cli.flags.nodemodules
+              ? singleDirOrFilePath
+              : [singleDirOrFilePath, "!**/node_modules/**"],
+            {
+              expandDirectories: {
+                files: [".*", "*.json"],
+              },
+            }
+          );
 
-        return concattedTotal.concat(...pGlobby);
-      } else {
-        return concattedTotal.concat(singleDirOrFilePath);
-      }
-    },
-    []
-  );
-
-  paths = paths
-    .filter((oneOfPaths) => !oneOfPaths.includes("package-lock.json"))
-    .filter((oneOfPaths) => !oneOfPaths.includes("yarn.lock"))
-    .filter((oneOfPaths) => (cli.flags.nodemodules ? true : !oneOfPaths.includes("node_modules")))
-    .filter((oneOfPaths) => (cli.flags.pack ? !oneOfPaths.includes("package.json") : true))
-    .filter((oneOfPaths) => {
-      const isJson = path.extname(oneOfPaths) === ".json";
-      const isString = typeof path.basename(oneOfPaths) === "string";
-      const isHideFile = path.basename(oneOfPaths).startsWith(".");
-
-      return (
-        isJson ||
-        (isString &&
-          isHideFile &&
-          !nonJsonFormats.some(path.extname(oneOfPaths).includes) &&
-          !badFiles.some(path.basename(oneOfPaths).includes))
-      );
-    });
-
-  if (cli.flags.dry && !cli.flags.silent) {
-    log(
-      `${chalk.grey(prefix)}${chalk.yellow("We'd try to sort the following files:")}\n${paths.join(
-        "\n"
-      )}`
+          return concattedTotal.concat(...pGlobby);
+        } else {
+          return concattedTotal.concat(singleDirOrFilePath);
+        }
+      },
+      []
     );
-  } else {
-    if (cli.flags.ci) {
-      // CI setting
-      const pathFiltred = await pFilter(paths, isDifference);
-      /* istanbul ignore else */
-      if (pathFiltred.length && !cli.flags.silent) {
-        log(`${chalk.grey(prefix)}${chalk.red("Unsorted files:")}\n${pathFiltred.join("\n")}`);
+    //#endregion
 
-        process.exit(9);
-      } else if (!cli.flags.silent) {
-        log(
-          `${chalk.grey(prefix)}${chalk.white("All files were already sorted:")}\n${paths.join(
-            "\n"
-          )}`
+    //#region filter files
+    paths = paths
+      .filter((oneOfPaths) => !oneOfPaths.includes("package-lock.json"))
+      .filter((oneOfPaths) => !oneOfPaths.includes("yarn.lock"))
+      .filter((oneOfPaths) => (cli.flags.nodemodules ? true : !oneOfPaths.includes("node_modules")))
+      .filter((oneOfPaths) => (cli.flags.pack ? !oneOfPaths.includes("package.json") : true))
+      .filter((oneOfPaths) => {
+        const isJson = path.extname(oneOfPaths) === ".json";
+        const isString = typeof path.basename(oneOfPaths) === "string";
+        const isHideFile = path.basename(oneOfPaths).startsWith(".");
+
+        return (
+          isJson ||
+          (isString &&
+            isHideFile &&
+            !nonJsonFormats.some(path.extname(oneOfPaths).includes) &&
+            !badFiles.some(path.basename(oneOfPaths).includes))
         );
+      });
+    //#endregion
 
-        process.exit(0);
-      }
+    //#region only show files to sort
+    if (cli.flags.dry && !cli.flags.silent) {
+      log(
+        `${chalk.grey(prefix)}${chalk.yellow(
+          "We'd try to sort the following files:"
+        )}\n${paths.join("\n")}`
+      );
 
       return;
     }
+    //#endregion
 
+    //#region working for CI mode
+    if (cli.flags.ci) {
+      const pathFiltred = await pFilter(paths, isDifference);
+
+      if (cli.flags.silent) return;
+
+      if (pathFiltred.length) {
+        log(`${chalk.grey(prefix)}${chalk.red("Unsorted files:")}\n${pathFiltred.join("\n")}`);
+
+        process.exit(9);
+      }
+
+      log(
+        `${chalk.grey(prefix)}${chalk.white("All files were already sorted:")}\n${paths.join("\n")}`
+      );
+
+      process.exit(0);
+    }
+    //#endregion
+
+    //#region calculate good and bad files.
     const counter = await pReduce<
       string,
       {
@@ -124,12 +136,10 @@ if (cli.flags.version) {
                 bad: counter.bad.concat(currentPath),
               };
         } catch (err) {
-          /* istanbul ignore next */
-          if (!cli.flags.silent) {
+          if (!cli.flags.silent)
             log(`${chalk.grey(prefix)}${chalk.red("Could not write out the sorted file:")} ${err}`);
-          }
 
-          throw err;
+          return counter;
         }
       },
       { good: [], bad: [] }
@@ -151,6 +161,11 @@ if (cli.flags.version) {
             : ""
         }`
       );
+    }
+    //#endregion
+  } catch (err) {
+    if (!cli.flags.silent) {
+      log(`${chalk.grey(prefix)}${chalk.red("Oops!")} ${err}`);
     }
   }
 })();
