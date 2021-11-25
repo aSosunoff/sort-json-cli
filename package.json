@@ -23,6 +23,7 @@
     "meow": "^10.1.1",
     "p-filter": "^3.0.0",
     "p-reduce": "^3.0.0",
+    "sort-package-json": "^1.53.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   },
