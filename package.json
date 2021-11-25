@@ -1,18 +1,40 @@
 {
   "name": "sort-json-cli",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start_old": "npx ts-node ./src/index.ts",
-    "start": "node --loader ts-node/esm ./src/index.ts ./src -r",
-    "start_dist": "node ./dist/index.js",
-    "s": "npx ts-node ./src/test.ts",
-    "t": "npx ts-node ./src/t.ts",
-    "dist": "cross-env CONFIG=dist webpack --mode production"
+  "description": "command line app to deep sort JSON files, retains package.json special key order",
+  "homepage": "https://github.com/aSosunoff/sort-json-cli",
+  "author": {
+    "name": "Alexander Sosunov",
+    "url": "https://github.com/aSosunoff"
   },
-  "author": "",
-  "license": "ISC",
+  "main": "dist/index.js",
+  "bugs": {
+    "url": "https://github.com/aSosunoff/sort-json-cli/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aSosunoff/sort-json-cli"
+  },
+  "keywords": [
+    "json",
+    "sort",
+    "ci"
+  ],
+  "files": [
+    "/dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "node --loader ts-node/esm ./src/index.ts ./src/source.json",
+    "build": "npx tsc",
+    "s": "npx ts-node ./src/test.ts",
+    "t": "npx ts-node ./src/t.ts"
+  },
   "dependencies": {
     "chalk": "^4.1.2",
     "fs-extra": "^10.0.0",

@@ -6,7 +6,7 @@ export const cli = meow(
       $ sortjsoncli YOURFILE.json
   
     Options
-      -r, --target          Save to target file
+      -r, --target           Save to target file
       -n, --nodemodules      Don't ignore any node_modules folders
       -t, --tabs             Use tabs for JSON file indentation
       -i, --indentationCount How many spaces or tabs to use (default = 2 spaces or 1 tab)
