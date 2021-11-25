@@ -7,7 +7,10 @@ import pFilter from "p-filter";
 
 import { cli } from "./utils/cli.js";
 import { nonJsonFormats, badFiles, prefix } from "./utils/constant.js";
-import { readSortAndWriteFile } from "./utils/read-sort-and-write-file.js";
+import {
+  readSortAndWriteFile,
+  readSortAndWriteFile_CIMode,
+} from "./utils/read-sort-and-write-file.js";
 
 const log = console.log;
 
@@ -81,22 +84,26 @@ if (cli.flags.version) {
       )}`
     );
   } else {
-    /* 7 */
-    // if (cli.flags.ci) {
-    //   // CI setting
-    //   const received2 = await pFilter(paths, readSortAndWriteOverFile);
-    //   /* istanbul ignore else */
-    //   if (received2.length && !cli.flags.silent) {
-    //     log(`${chalk.grey(prefix)}${chalk.red("Unsorted files:")}\n${received2.join("\n")}`);
-    //     process.exit(9);
-    //   } else if (!cli.flags.silent) {
-    //     log(
-    //       `${chalk.grey(prefix)}${chalk.white("All files were already sorted:")}\n${paths.join("\n")}`
-    //     );
-    //     process.exit(0);
-    //   }
-    //   return;
-    // }
+    if (cli.flags.ci) {
+      // CI setting
+      const pathFiltred = await pFilter(paths, readSortAndWriteFile_CIMode);
+      /* istanbul ignore else */
+      if (pathFiltred.length && !cli.flags.silent) {
+        log(`${chalk.grey(prefix)}${chalk.red("Unsorted files:")}\n${pathFiltred.join("\n")}`);
+
+        process.exit(9);
+      } else if (!cli.flags.silent) {
+        log(
+          `${chalk.grey(prefix)}${chalk.white("All files were already sorted:")}\n${paths.join(
+            "\n"
+          )}`
+        );
+
+        process.exit(0);
+      }
+
+      return;
+    }
 
     const counter = await pReduce<
       string,
