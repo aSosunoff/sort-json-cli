@@ -2,9 +2,11 @@ import chalk from "chalk";
 import path from "path";
 import sortPackageJson from "sort-package-json";
 import fsx from "fs-extra";
+import fs from "fs";
+import util from "util";
 
 import { getIndentationCount, prefix } from "./constant.js";
-import { saveFile } from "./save-file.js";
+/* import { saveFile } from "./save-file.js"; */
 import { sortObject } from "./sort-object.js";
 
 const log = console.log;
@@ -100,7 +102,7 @@ export class SortJson implements ISortJsonOption {
         pathToFile = oneOfPaths;
       }
 
-      await saveFile(pathToFile, content);
+      await util.promisify(fs.writeFile)(pathToFile, content);
 
       return true;
     } catch (err) {
