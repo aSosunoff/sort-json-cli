@@ -78,7 +78,7 @@ export const readSortAndWriteFile = async (oneOfPaths: string) => {
   }
 };
 
-export const readSortAndWriteFile_CIMode = async (oneOfPaths: string) => {
+export const isDifference = async (oneOfPaths: string) => {
   try {
     let { sortContent, unsortContent } = await sortingObject(oneOfPaths);
 
