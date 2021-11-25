@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import path from "path";
 import { globby } from "globby";
 import chalk from "chalk";
