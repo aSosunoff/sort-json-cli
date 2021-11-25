@@ -28,6 +28,7 @@ if (cli.flags.version) {
       pack: cli.flags.pack,
       target: cli.flags.target,
       tabs: cli.flags.tabs,
+      silent: cli.flags.silent,
     });
 
     let paths = await globby(cli.input, { dot: true });
