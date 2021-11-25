@@ -7,10 +7,7 @@ import pFilter from "p-filter";
 
 import { cli } from "./utils/cli.js";
 import { nonJsonFormats, badFiles, prefix } from "./utils/constant.js";
-import {
-  readSortAndWriteFile,
-  readSortAndWriteFile_CIMode,
-} from "./utils/read-sort-and-write-file.js";
+import { readSortAndWriteFile, isDifference } from "./utils/read-sort-and-write-file.js";
 
 const log = console.log;
 
@@ -86,7 +83,7 @@ if (cli.flags.version) {
   } else {
     if (cli.flags.ci) {
       // CI setting
-      const pathFiltred = await pFilter(paths, readSortAndWriteFile_CIMode);
+      const pathFiltred = await pFilter(paths, isDifference);
       /* istanbul ignore else */
       if (pathFiltred.length && !cli.flags.silent) {
         log(`${chalk.grey(prefix)}${chalk.red("Unsorted files:")}\n${pathFiltred.join("\n")}`);
