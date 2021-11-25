@@ -7,7 +7,7 @@ import pFilter from "p-filter";
 
 import { cli } from "./utils/cli.js";
 import { nonJsonFormats, badFiles, prefix } from "./utils/constant.js";
-import { readSortAndWriteFile, isDifference } from "./utils/read-sort-and-write-file.js";
+import { SortJson } from "./utils/SortJson.js";
 
 const log = console.log;
 
@@ -23,6 +23,13 @@ if (cli.flags.version) {
 
 (async () => {
   try {
+    const sortJson = new SortJson({
+      indentationCount: cli.flags.indentationCount,
+      pack: cli.flags.pack,
+      target: cli.flags.target,
+      tabs: cli.flags.tabs,
+    });
+
     let paths = await globby(cli.input, { dot: true });
 
     //#region The inputs don't lead to any json files! Exiting.
@@ -95,7 +102,7 @@ if (cli.flags.version) {
 
     //#region working for CI mode
     if (cli.flags.ci) {
-      const pathFiltred = await pFilter(paths, isDifference);
+      const pathFiltred = await pFilter(paths, sortJson.isDifference);
 
       if (cli.flags.silent) return;
 
@@ -124,7 +131,7 @@ if (cli.flags.version) {
       paths,
       async (counter, currentPath) => {
         try {
-          const res = await readSortAndWriteFile(currentPath);
+          const res = await sortJson.readSortAndWriteFile(currentPath);
 
           return res
             ? {
