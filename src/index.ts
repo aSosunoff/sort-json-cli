@@ -47,9 +47,9 @@ if (cli.flags.version) {
           }
         );
 
-        return concattedTotal.concat(pGlobby);
+        return concattedTotal.concat(...pGlobby);
       } else {
-        return concattedTotal.concat([singleDirOrFilePath]);
+        return concattedTotal.concat(singleDirOrFilePath);
       }
     },
     []
@@ -69,8 +69,8 @@ if (cli.flags.version) {
         isJson ||
         (isString &&
           isHideFile &&
-          !nonJsonFormats.some((badExtension) => path.extname(oneOfPaths).includes(badExtension)) &&
-          !badFiles.some((badFile) => path.basename(oneOfPaths).includes(badFile)))
+          !nonJsonFormats.some(path.extname(oneOfPaths).includes) &&
+          !badFiles.some(path.basename(oneOfPaths).includes))
       );
     });
 
